@@ -1,0 +1,20 @@
+1. El Problema: Checkout Lento = Clientes Perdidos
+Escenario: En nuestra tienda "UrbanStyle", durante picos de venta como el "Buen Fin", los clientes esperan hasta 15 segundos después de pagar.
+
+Causa: El sistema intenta hacerlo todo a la vez: procesar el pago, actualizar inventario, enviar el email de confirmación y notificar a logística.
+
+Impacto: Los clientes se frustran, dudan si la compra se realizó y abandonan el carrito. La experiencia es mala y daña la imagen de la marca.
+
+2. La Solución: Confirmación Instantánea
+Propuesta de Negocio: Dar al cliente una confirmación inmediata en pantalla (en menos de 2 segundos) justo después de que el pago es aprobado.
+
+¿Cómo?: Todas las tareas secundarias (inventario, emails, logística) se ejecutarán en segundo plano, de forma asíncrona. El cliente no tiene por qué esperar por ellas.
+
+3. La Tarea Técnica (Resumen)
+Objetivo: Modificar el servicio que procesa las compras (POST /messages).
+
+Acción Clave: Inmediatamente después de confirmar un pago, el sistema publicará un mensaje en un "canal de notificaciones" interno (un tópico de Google Pub/Sub).
+
+Regla de Oro: Este proceso no debe retrasar la respuesta al cliente. Si la publicación de la notificación falla, se registra el error internamente pero el cliente siempre ve su pantalla de "Compra Exitosa" sin demora.
+
+Este cambio nos permite ser más rápidos, robustos y ofrecer una experiencia de compra superior.
