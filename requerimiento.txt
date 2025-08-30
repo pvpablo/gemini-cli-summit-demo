@@ -11,7 +11,7 @@ Propuesta de Negocio: Dar al cliente una confirmación inmediata en pantalla (en
 ¿Cómo?: Todas las tareas secundarias (inventario, emails, logística) se ejecutarán en segundo plano, de forma asíncrona. El cliente no tiene por qué esperar por ellas.
 
 3. La Tarea Técnica (Resumen)
-Objetivo: Modificar el servicio que procesa las compras (POST /messages).
+Objetivo: Modificar el servicio que procesa las compras (POST /ordenes).
 
 Acción Clave: Inmediatamente después de confirmar un pago, el sistema publicará un mensaje en un "canal de notificaciones" interno (un tópico de Google Pub/Sub).
 
